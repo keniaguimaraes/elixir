@@ -7,5 +7,5 @@ defmodule AskName do
 
       _ ->
         "Ola, grande amigx > #{String.trim(resposta)} < :D!!!"
-    end
-  end2
+  end
+end
