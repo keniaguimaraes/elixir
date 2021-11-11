@@ -29,7 +29,7 @@ defmodule AdivinharNumero do
 
     def iniciar() do
         {menor, _} = IO.gets("Digite o menor valor do intervalo em que seu numero está: ") |> String.trim |> Integer.parse
-        {maior, _} = IO.gets("Digite o menor valor do intervalo em que seu numero está: ") |> String.trim |> Integer.parse
+        {maior, _} = IO.gets("Digite o maior valor do intervalo em que seu numero está: ") |> String.trim |> Integer.parse
         adivinhacao(menor, maior)
     end
 end
