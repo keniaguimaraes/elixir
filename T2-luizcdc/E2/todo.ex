@@ -1,4 +1,5 @@
 defmodule MinimalTodo do
+
   def start do
     input = IO.gets("Criar um novo .csv? SIM/NAO") |> String.trim |> String.upcase
     if input in ["S", "SIM"] do
@@ -8,14 +9,14 @@ defmodule MinimalTodo do
     end
   end
 
-  def novo_todo(data) do
-    name = ler_nome_de_todo(data)
-    titles = get_campos data
+  def novo_todo(dados) do
+    name = ler_nome_de_todo(dados)
+    titles = get_campos dados
     fields = Enum.map(titles, fn field -> ler_campo(field) end)
-    new_todo = %{name => Enum.into(fields, %{})}
+    novo_todo = %{name => Enum.into(fields, %{})}
     IO.puts("Novo Todo \"#{name}\" added.")
-    new_data = Map.merge(data, new_todo)
-    ler_comando(new_data)
+    novos_dados = Map.merge(dados, novo_todo)
+    ler_comando(novos_dados)
   end
 
   def definir_header(headers) do
@@ -28,8 +29,9 @@ defmodule MinimalTodo do
   def definir_headers do
     IO.puts "Que campos cada Todo deve ter?\n"
     <> "Insira o nome dos campos um por um e uma linha em branco para finalizar.\n"
-    create_header([])
+    definir_header([])
   end
+
 
   def criar_todo_inicial do
     titles = definir_headers()
@@ -64,18 +66,20 @@ defmodule MinimalTodo do
     opcao = IO.gets("""
     Digite a inicial da opção que quer selecionar:
 
-    L)er Todos   A)dicionar novo Todo   D)eletar um Todo    C)arregar um .csv    S)alvar um .csv
+    L)er Todos   A)dicionar novo Todo   D)eletar um Todo
+
+    C)arregar um .csv    S)alvar um .csv    E)ncerrar o programa
     """)
       |> String.trim
-      |> String.upercase
+      |> String.upcase
 
-    case comando do
+    case opcao do
       "A" -> novo_todo(dados)
       "L" -> mostrar_todos(dados)
       "D" -> apagar_todo(dados)
       "C" -> importar_csv()
       "S" -> salvar_arquivo_csv(dados)
-      "Q" -> "Encerrando o programa."
+      "E" -> "Encerrando o programa."
       _   -> ler_comando(dados)
     end
   end
@@ -83,6 +87,7 @@ defmodule MinimalTodo do
   def get_campos(dados) do
     dados[hd Map.keys dados] |> Map.keys
   end
+
   def ler_nome_de_todo(dados) do
     name = IO.gets("Insira o nome do novo Todo: ") |> String.trim
     if Map.has_key?(dados,name) do
@@ -102,12 +107,12 @@ defmodule MinimalTodo do
 
   def parse(body) do
     [header | lines] = String.split(body, ~r{(\r\n|\r|\n)})
-    titles = tl Strng.split(header, ",")
+    titles = tl String.split(header, ",")
     parse_lines(lines, titles)
   end
 
   def parse_lines(lines, titles) do
-    Enum,reduce(lines, %{}, fn line, built ->
+    Enum.reduce(lines, %{}, fn line, built ->
       [name | fields] = String.split(line, ",")
       if Enum.count(fields) == Enum.count(titles) do
         line_data = Enum.zip(titles, fields) |> Enum.into(%{})
@@ -127,31 +132,30 @@ defmodule MinimalTodo do
     end
   end
 
-
-  def salvar_arquivo_csv(data) do
-    nome_do_arquivo = IO.gets("Nome do arquivo .csv de salvamento: ") |> Strim.trim
-    headers = ["Item" | get_campos data]
-    items = Map.keys(data)
-    item_rows = Enum.map(items, fn item -> [item | Map.values(data[item])] end)
+  def salvar_arquivo_csv(dados) do
+    nome_do_arquivo = IO.gets("Nome do arquivo .csv de salvamento: ") |> String.trim
+    headers = ["Item" | get_campos dados]
+    items = Map.keys(dados)
+    item_rows = Enum.map(items, fn item -> [item | Map.values(dados[item])] end)
     rows = [headers | item_rows]
     row_strings = Enum.map(rows, fn x -> Enum.join(x, ",") end)
     filedata = Enum.join(row_strings, "\n")
     case File.write(nome_do_arquivo, filedata) do
       :ok ->  IO.puts("Salvamento completo.")
-              ler_comando(data)
+              ler_comando(dados)
       {:error, reason} -> IO.puts("Não foi possível salvar o arquivo \"#{nome_do_arquivo}\"")
                           IO.puts ~s("#{:file.format_error reason}"\n)
-                          ler_comando(data)
+                          ler_comando(dados)
     end
   end
 
-  def mostrar_todos(data, next_command? \\ true) do
-    items = Map.keys data
+  def mostrar_todos(dados, voltar_para_menu? \\ true) do
+    items = Map.keys dados
     IO.puts("Você tem os Todos a seguir:\n")
     Enum.each items, fn item -> IO.puts item end
     IO.puts "\n"
-    if next_command? do
-      ler_comando(data)
+    if voltar_para_menu? do
+      ler_comando(dados)
     end
   end
 
