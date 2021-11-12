@@ -1,5 +1,9 @@
 #Aluno: Carlos Mosselman Cabral Neto
 #Exemplos de funções
+
+#Função anônima (podem ser passadas dentro de outras funções ou na linha de comando)
+dividir = fn (x, y) -> x/y end
+
 defmodule FuncaoNomeada do
 
   #Função nomeada padrão
@@ -23,10 +27,7 @@ defmodule FuncaoNomeada do
 
   #Função com guard (vai arredondar o valor de x se for do tipo float)
   def arredondar(x) when is_float(x) do
-    round(x)
+    IO.puts("O número arredondado é #{round(x)}")
   end
-
-  #Função anônima (podem ser passadas dentro de outras funções ou na linha de comando)
-  #    dividir = fn (x, y) -> x/y end
 
 end

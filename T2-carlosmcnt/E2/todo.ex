@@ -11,7 +11,7 @@ defmodule ToDo do
   def comandos(info) do
     entrada = """
     Selecione a opção desejada:
-    a) Mostrar ToDos       b)Deletar ToDo     c) Sair
+    a) Mostrar ToDos       b)Deletar ToDo     c)Adicionar ToDo    d) Sair
     """
 
     comando = IO.gets(entrada)
@@ -21,7 +21,7 @@ defmodule ToDo do
     case comando do
       "a"     -> mostrarToDo(info)
       "b"     -> deletarToDo(info)
-      "c"     -> "Saindo..."
+      "d"     -> "Saindo..."
       _       -> comandos(info)
     end
   end
@@ -34,7 +34,7 @@ defmodule ToDo do
       IO.puts(~s{"#{todo}" foi deletado.})
       comandos(new_map)
     else
-      IO.puts(~s(Não tem ToDo com nome "#{todo}"!))
+      IO.puts(~s(Não tem ToDo com nome "#{todo}".))
       mostrarToDo(info, false)
       deletarToDo(info)
     end
@@ -73,7 +73,7 @@ defmodule ToDo do
 
   def mostrarToDo(info, proximo_comando? \\ true) do
     items = Map.keys(info)
-    IO.puts("You have the following Todos:\n")
+    IO.puts("Você tem esses ToDos:\n")
     Enum.each(items, fn item -> IO.puts(item) end)
     IO.puts("\n")
     if proximo_comando? do
