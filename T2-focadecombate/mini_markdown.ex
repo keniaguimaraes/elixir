@@ -4,6 +4,8 @@ defmodule MiniMarkdown do
       |> italics()
       |> bold()
       |> paragraph()
+      |> h1()
+      |> h2()
   end
 
   def bold(text) do
