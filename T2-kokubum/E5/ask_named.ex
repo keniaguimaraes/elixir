@@ -1,4 +1,14 @@
 defmodule AskName do
+  @moduledoc """
+  Fornece a função ask_name que pergunta o nome do usuário e o cumprimenta de acordo com o nome que ele colocou.
+  Se o nome for igual ao do autor (Erick), a mensagem então será diferente.
+  """
+
+  @doc """
+  Pergunta o nome do usuário e imprime uma mensagem comum, caso o nome seja igual ao do autor do código (Erick), será
+  impresso uma mensagem diferente.
+  """
+  @spec ask_name() :: :ok
   def ask_name() do
     name = IO.gets("What's your name? ")
     baseName = String.upcase(name)
