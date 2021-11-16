@@ -1,9 +1,0 @@
-With multi-agent systems (MASs) growing in size and complexity, 
-the separation of their concerns throughout the different development phases is crucial to MAS engineers.
-Separation of concerns is a well-known principle in software engineering to achieve improved reusability 
-and maintainability of complex software. 
-Hence it is necessary to investigate systematically whether abstractions 
-from object-oriented (OO) software engineering are able to isolate explicitly MAS concerns.
-This paper presents an empirical study that evaluates the degree to which abstractions 
-associated with two OO techniques enable modularization of MAS concerns. 
-The selected techniques involve basic OO abstractions, such as classes and objects, and more sophisticated ones, namely design patterns and aspects
