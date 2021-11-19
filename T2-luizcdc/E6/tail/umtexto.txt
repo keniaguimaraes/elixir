@@ -1,0 +1,15 @@
+1Functional Programming
+2
+3While its roots are in lambda calculus,
+4functional programming can be fun, easy, and
+5approachable for everyone!
+6By focusing on breaking problems down into simple,
+7side-effect free, functions we can ensure fewer bugs,
+8better test coverage, while incrementally
+9building our solutions through the composition of well tested functions.
+10
+11(Why Elixir? 2021)
+12
+13
+14
+15
