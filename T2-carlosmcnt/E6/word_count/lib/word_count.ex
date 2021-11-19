@@ -9,11 +9,14 @@ defmodule WordCount do
 
   def ajuda() do
     IO.puts """
+      Formatação: word_count [arquivo] -[flags]
       Flags
       -l contagem de linhas
       -c contagem de caracteres
       -w contagem de palavras
-      umtexto.txt -lc
+
+      Exemplo:
+      word_count umtexto.txt -wcl
       """
   end
 
