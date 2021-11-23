@@ -1,3 +1,5 @@
+# elixir -r exemplos.ex exemplos_test.exs
+
 ExUnit.start()
 
 defmodule ExemplosTest do

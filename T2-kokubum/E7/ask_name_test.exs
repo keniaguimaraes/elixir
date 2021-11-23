@@ -1,3 +1,5 @@
+# elixir -r ask_name.ex ask_name_test.exs
+
 ExUnit.start()
 
 defmodule AskNameTest do
