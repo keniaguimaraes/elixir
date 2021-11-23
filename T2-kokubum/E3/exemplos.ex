@@ -81,10 +81,10 @@ defmodule Guard do
   end
 end
 
-#Argumentos Padroes
+# Argumentos Padroes
 
 defmodule Default do
-  def defaultParameterSum(a, b \\ 1, c \\ 2)
+  def defaultParameterSum(a, b \\ 1, c \\ 2) do
     a + b + c
   end
 end
