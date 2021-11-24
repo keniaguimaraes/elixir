@@ -9,7 +9,7 @@ defmodule Tail do
       show_help()
     else
       flags = Enum.into(parsed, %{})
-      ler_arquivo(arquivo, flags)
+      read_file(arquivo, flags)
     end
   end
 
