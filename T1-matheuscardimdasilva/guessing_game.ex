@@ -37,6 +37,3 @@ defmodule GuessingGame do
 
 
 end
-
-
-GuessingGame.adivinhar 0, 100
